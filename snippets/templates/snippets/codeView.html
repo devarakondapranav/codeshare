@@ -1,0 +1,20 @@
+{% extends "snippets/base.html" %}
+
+{% block content %}
+	<div class="card">
+	  <h5 class="card-header">{{code_object.title}}</h5>
+
+	  <div class="card-body">
+	   <h7 class="card-title">by {{code_object.author}}</h7>
+	   <hr>
+	    <p class="card-text" style="white-space: pre;">{{code_object.code_snippet}} </p>
+	    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+	    <hr>
+	    {% if user.is_authenticated and user.get_username == code_object.author %}
+	    	<a href="/snippets/edit/{{code_object.id}}" class="btn btn-primary">Edit</a>
+
+	    {% endif %}
+	  </div>
+
+	</div>
+{% endblock %}

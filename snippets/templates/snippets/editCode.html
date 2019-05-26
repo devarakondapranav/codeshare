@@ -1,0 +1,77 @@
+{% extends "snippets/base.html" %}
+
+{% block content %}
+	<h3>Add new code</h3>
+	<br>
+	<script type="text/javascript">
+		alert("code is  {{code_object.code_snippet}}" );
+		console.log("code is  {{code_object.code_snippet}}")
+	</script>
+	<form action="/snippets/makeChanges/{{code_object.id}}" method="post" class="needs-validation" novalidate>{% csrf_token %}
+	<!--
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Title</label>
+	    
+	    <input type="text" name="title" id="title"  class="form-control" placeholder="Your name" width="80" required>
+		
+	    <small id="emailHelp" class="form-text text-muted">Enter a relevant title for your code.</small>
+	  </div>
+	  
+	  <div class="form-group">
+	    <label for="exampleFormControlTextarea1">Your code</label>
+	    <textarea class="form-control" id="code_snippet" name = "code_snippet" rows="15" required></textarea>
+	  
+	  </div> -->
+	  <div >
+	    <div class="col-md-4 mb-3">
+	      <label for="validationCustom01">Title</label>
+	      <input type="text" class="form-control" id="validationCustom01" name="title" placeholder="Enter a relevant title" value="{{code_object.title}}" required>
+	      <div class="valid-feedback">
+	        Looks good!
+	      </div>
+	      <div class="invalid-feedback">
+	        Please enter a title.
+	      </div>
+
+	    </div>
+	    <div class="col-md-8 mb-3">
+	      <label for="validationCustom02">Your code</label>
+	      <textarea type="text" class="form-control" id="validationCustom02" name = "code_snippet" placeholder="Add your code here" required rows="18">{{code_object.code_snippet}}</textarea>
+	      <div class="valid-feedback">
+	        Looks good!
+	      </div>
+	      <div class="invalid-feedback">
+	        You haven't added any code.
+	      </div>
+
+	    </div>
+	    
+	  </div>
+	  
+	  
+	  <button type="submit" class="btn btn-primary">Make changes</button>
+	</form>
+	<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+	(function() {
+	  'use strict';
+	  window.addEventListener('load', function() {
+	    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+	    var forms = document.getElementsByClassName('needs-validation');
+	    // Loop over them and prevent submission
+	    var validation = Array.prototype.filter.call(forms, function(form) {
+	      form.addEventListener('submit', function(event) {
+	        if (form.checkValidity() === false) {
+	          event.preventDefault();
+	          event.stopPropagation();
+	        }
+	        form.classList.add('was-validated');
+	      }, false);
+	    });
+	  }, false);
+	})();
+	</script>
+
+
+
+{% endblock %}

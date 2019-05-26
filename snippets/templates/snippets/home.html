@@ -1,0 +1,9 @@
+{% extends "snippets/base.html" %}
+
+{% block content %}
+	{% for x in codes_list %}
+			<li>
+			 	<a href="/snippets/{{x.id}}">{{x.title}}</a> by {{x.author}}			
+			</li>
+	{% endfor %}
+{% endblock %}
