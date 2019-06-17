@@ -4,7 +4,7 @@
 {{username}}
 	{% for x in codes_list %}
 			<li>
-			 	<a href="/snippets/{{x.id}}">{{x.title}}</a> by {{x.author}}			
+			 	<a href="/snippets/{{x.id}}">{{x.title}}</a> by  <a href="/snippets/profile/{{x.author}}" style="color: red">{{x.author}}</a>			
 			</li>
 	{% endfor %}
 {% endblock %}
