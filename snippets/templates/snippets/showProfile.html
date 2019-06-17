@@ -1,0 +1,16 @@
+{% extends "snippets/base.html" %}
+
+{% block content %}
+	{% if no_of_articles > 0 %}
+	
+		<h3>{{username}} has contributed the following codes.</h3><br><br>
+		{% for x in articles %}
+				<li>
+				 	<a href="/snippets/{{x.id}}">{{x.title}}</a> by {{x.author}}			
+				</li>
+		{% endfor %}
+
+	{% else %}
+		<h3> {{username}} hasn't contributed anything yet</h3>
+	{% endif %}
+{% endblock %}

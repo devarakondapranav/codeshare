@@ -49,14 +49,44 @@ def editCode(request, code_id):
 		return render(request, 'snippets/errorPage.html', context)
 
 def makeChanges(request, code_id):
+
 	c = Code.objects.get(pk=code_id)
-	c.title = request.POST["title"]
-	c.code_snippet = request.POST["code_snippet"]
-	c.save()
-	context = {"code_object":c}
+	if(request.user.is_authenticated and (c.author == request.user.username)):
+		c.title = request.POST["title"]
+		c.code_snippet = request.POST["code_snippet"]
+		c.save()
+		context = {"code_object":c}
 
-	return render(request, 'snippets/changeSuccess.html', context)
+		return render(request, 'snippets/changeSuccess.html', context)
+	else:
+		context = {}
+		if(request.user.is_authenticated):
+			context["errorMessage"] = "You do not have permission to edit this article :( Contact " + c.author + " to make changes to this code."
+		else:
+			context["errorMessage"] = "Please login	 to add new code."
+		return render(request, 'snippets/errorPage.html', context)
 
-def testing(request):
+def showProfile(request, username):
 
-	pass
+	articles = Code.objects.filter(author= username)
+	context = {'articles':articles, 'username':username, 'no_of_articles':len(articles)}
+
+	return render(request, 'snippets/showProfile.html', context)
+
+def search(request):
+
+	search_term = request.POST['search_term'].lower()
+
+	all_articles = Code.objects.order_by('-pub_date')
+	results = []
+
+	for article in all_articles:
+		if((search_term in article.code_snippet.lower()) or (search_term in article.title.lower()) or (search_term in article.author.lower())):
+			results.append(article)
+
+	context = {'results':results}
+
+	return render(request, 'snippets/searchResults.html', context)
+
+
+

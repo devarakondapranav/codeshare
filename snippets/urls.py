@@ -9,5 +9,7 @@ urlpatterns = [
     path('submitNewCodeSnippet', views.submitNewCodeSnippet, name = 'submitNewCodeSnippet'),
     path('edit/<int:code_id>/', views.editCode, name='editCode'),
     path('makeChanges/<int:code_id>', views.makeChanges, name='makeChanges'),
-    path('testing', views.testing),
+    path('profile/<str:username>', views.showProfile, name='showProfile'),
+    path('search', views.search, name='search')
+    
 ]

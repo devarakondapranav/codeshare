@@ -1,10 +1,14 @@
 {% extends "snippets/base.html" %}
 
 {% block content %}
-{{username}}
-	{% for x in codes_list %}
+
+	<h3>Your search results</h3>
+	{% for x in results %}
 			<li>
 			 	<a href="/snippets/{{x.id}}">{{x.title}}</a> by {{x.author}}			
 			</li>
-	{% endfor %}
+	{% endfor %} 
+
+
+
 {% endblock %}
