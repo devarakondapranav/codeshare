@@ -1,14 +1,14 @@
-{% extends "snippets/base.html" %}
+{% extends "snippets/base1.html" %}
 
 {% block content %}
-	<div class="card">
-	  <h5 class="card-header">{{code_object.title}}</h5>
+	<!-- <div class="card">
+	  <h5 class="card-header display-1 display-1--with-line-sep">{{code_object.title}}</h5>
 
 	  <div class="card-body">
 	   <h7 class="card-title">by {{code_object.author}}</h7>
 	   <hr>
 	    <p class="card-text" style="white-space: pre;">{{code_object.code_snippet}} </p>
-	    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+	    
 	    <hr>
 	    {% if user.is_authenticated and user.get_username == code_object.author %}
 	    	<a href="/snippets/edit/{{code_object.id}}" class="btn btn-primary">Edit</a>
@@ -16,5 +16,43 @@
 	    {% endif %}
 	  </div>
 
-	</div>
+	</div> -->
+
+	<article class="row entry format-standard">
+
+            <div class="entry__media col-full">
+                <div class="entry__post-thumb">
+                    
+                </div>
+            </div>
+
+            <div class="entry__header col-full">
+                <h1 class="entry__header-title display-1">
+                    {{code_object.title}}
+                </h1>
+                <ul class="entry__header-meta">
+                    <li class="date">{{code_object.pub_date}}</li>
+                    <li class="byline">
+                        By
+                        <a href="/snippets/profile/{{code_object.author}}">{{code_object.author}}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-full entry__main">
+            	<pre><code>
+            		{{code_object.code_snippet}}
+            	</code></pre>
+            </div>
+
+            <hr>
+		    {% if user.is_authenticated and user.get_username == code_object.author %}
+		    	<a href="/snippets/edit/{{code_object.id}}" class="btn btn-primary">Edit</a>
+
+		    {% endif %}
+
+	</article>
+
+
+
 {% endblock %}
