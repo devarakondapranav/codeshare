@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="lib/codemirror.js"></script>
+<link rel="stylesheet" href="lib/codemirror.css">
+<script src="mode/javascript/javascript.js"></script>
+	<title></title>
+</head>
+<body>
+	<h1>Testing code mirror</h1>
+
+	<textarea id="snippet"></textarea>
+	<script type="text/javascript">
+		
+		var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('snippet'), {
+			lineNumbers: true,
+		});
+	</script>
+
+</body>
+</html>

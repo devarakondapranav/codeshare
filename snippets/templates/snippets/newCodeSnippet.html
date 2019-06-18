@@ -1,53 +1,57 @@
-{% extends "snippets/base.html" %}
+{% extends "snippets/base1.html" %}
 
-{% block content %}
-	<h3>Add new code</h3>
-	<br>
-	<form action="/snippets/submitNewCodeSnippet" method="post" class="needs-validation" novalidate>{% csrf_token %}
-	<!--
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Title</label>
-	    
-	    <input type="text" name="title" id="title"  class="form-control" placeholder="Your name" width="80" required>
-		
-	    <small id="emailHelp" class="form-text text-muted">Enter a relevant title for your code.</small>
-	  </div>
-	  
-	  <div class="form-group">
-	    <label for="exampleFormControlTextarea1">Your code</label>
-	    <textarea class="form-control" id="code_snippet" name = "code_snippet" rows="15" required></textarea>
-	  
-	  </div> -->
-	  <div >
-	    <div class="col-md-4 mb-3">
-	      <label for="validationCustom01">Title</label>
-	      <input type="text" class="form-control" id="validationCustom01" name="title" placeholder="Enter a relevant title" value="" required>
-	      <div class="valid-feedback">
-	        Looks good!
-	      </div>
-	      <div class="invalid-feedback">
-	        Please enter a title.
-	      </div>
+{% block newcode %}
 
-	    </div>
-	    <div class="col-md-8 mb-3">
-	      <label for="validationCustom02">Your code</label>
-	      <textarea type="text" class="form-control" id="validationCustom02" name = "code_snippet" placeholder="Add your code here" value="" required rows="18"></textarea>
-	      <div class="valid-feedback">
-	        Looks good!
-	      </div>
-	      <div class="invalid-feedback">
-	        You haven't added any code.
-	      </div>
-	      <input type="hidden" name="username" id="username" value="{{user.get_username}}">
 
-	    </div>
-	    
-	  </div>
-	  
-	  
-	  <button type="submit" class="btn btn-primary">Submit</button>
-	</form>
+	<div class="comments-wrap ">
+
+                <!-- START respond -->
+                <div id="respond" class="col-full">
+
+                    <h3 class="h2">Add Code <span>All fields are mandatory. Use a precise title</span></h3>
+
+                    <form name="contactForm" id="contactForm" method="post" action="/snippets/submitNewCodeSnippet" autocomplete="off" class="needs-validation" novalidate="">{% csrf_token %}
+                        <fieldset>
+
+                            <div class="form-field">
+                                <input name="title" id="title" class="full-width" placeholder="Title*" value="" type="text">
+                            </div>
+
+                            <!-- <div class="form-field">
+                                <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email*" value="" type="text">
+                            </div>
+
+                            <div class="form-field">
+                                <input name="cWebsite" id="cWebsite" class="full-width" placeholder="Website" value="" type="text">
+                            </div> -->
+
+                            <div class="message form-field">
+                                <!-- <textarea name="code_snippet" id="code_snippet" class="full-width" placeholder="Your Code*" ></textarea> -->
+                                
+                            </div> 
+                            <input type="hidden" name="username" id="username" value="{{user.get_username}}">
+
+                            <textarea id='code_snippet'></textarea>
+							<script>
+									  var editor = CodeMirror.fromTextArea(document.getElementById('code_snippet'), {
+									  	lineNumbers:true,
+									  });
+
+							</script>
+
+                            <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large " value="Submit" type="submit">
+
+                        </fieldset>
+                    </form> <!-- end form -->
+
+                </div>
+                <!-- END respond-->
+
+            </div> <!-- end comment-respond -->
+
+
+
+        
 	<script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 	(function() {

@@ -3927,8 +3927,7 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
  * ## comments 
  * ------------------------------------------------------------------- */
 .comments-wrap {
-  padding: 4.5rem 0 7.2rem;
-  margin-top: 10.2rem;
+  padding: 1.5rem 0 7.2rem;
 }
 
 .comments-wrap h3 {

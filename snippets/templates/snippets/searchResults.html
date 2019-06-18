@@ -1,12 +1,37 @@
-{% extends "snippets/base.html" %}
+{% extends "snippets/base1.html" %}
 
 {% block content %}
 
 	<h3>Your search results</h3>
 	{% for x in results %}
-			<li>
+			<!-- <li>
 			 	<a href="/snippets/{{x.id}}">{{x.title}}</a> by {{x.author}}			
-			</li>
+			</li> -->
+			<article class="col-block">
+                    
+                    <div class="item-entry" data-aos="zoom-in">
+                        <div class="item-entry__thumb">
+                            <a href="single-standard.html" class="item-entry__thumb-link">
+                                
+                            </a>
+                        </div>
+        
+                        <div class="item-entry__text">    
+                            <div class="item-entry__cat">
+                                <a href="/snippets/profile/{{x.author}}">{{x.author}}</a> 
+                            </div>
+    
+                            <h1 class="item-entry__title"><a href="/snippets/{{x.id}}">{{x.title}}</a></h1>
+                                
+                            <div class="item-entry__date">
+                                <a >{{x.pub_date}}</a>
+                            </div>
+                        </div>
+                    </div> <!-- item-entry -->
+
+                </article>
+
+			
 	{% endfor %} 
 
 
