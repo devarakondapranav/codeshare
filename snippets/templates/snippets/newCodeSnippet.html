@@ -26,18 +26,25 @@
                             </div> -->
 
                             <div class="message form-field">
-                                <!-- <textarea name="code_snippet" id="code_snippet" class="full-width" placeholder="Your Code*" ></textarea> -->
+                                <textarea name="code_snippet" id="code_snippet" class="full-width" placeholder="" ></textarea>
                                 
                             </div> 
                             <input type="hidden" name="username" id="username" value="{{user.get_username}}">
 
-                            <textarea id='code_snippet'></textarea>
+                            
 							<script>
+									//console.log(document.getElementById('code_snippet').style);
 									  var editor = CodeMirror.fromTextArea(document.getElementById('code_snippet'), {
-									  	lineNumbers:true,
-									  });
+									  	lineNumbers: true,
+										theme: 'monokai',
+										});
+									  
+									
 
 							</script>
+							<br>
+							
+
 
                             <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large " value="Submit" type="submit">
 

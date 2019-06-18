@@ -1,0 +1,13 @@
+<form action="/snippets/submitNewCodeSnippet" method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Title*"><br>
+
+    <textarea name="code_snippet" id="code_snippet"> </textarea>
+    <script type="text/javascript">
+        var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code_snippet"), {
+            lineNumbers: true,
+        });
+    </script>
+
+        
+    </form>

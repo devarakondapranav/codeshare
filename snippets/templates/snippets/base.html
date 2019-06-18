@@ -2,6 +2,11 @@
 <html>
 <head>
 	<title>CodeShare</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'snippets/lib/codemirror.css' %}">
+    <link rel="stylesheet" href="{% static 'snippets/theme/monokai.css' %}">
+    <!-- <script src="{% static 'snippets/mode/javascript/javascript.js' %}"></script> -->
+    <script src="{% static 'snippets/lib/codemirror.js' %}"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>

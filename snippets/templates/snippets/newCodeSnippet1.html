@@ -1,0 +1,30 @@
+{% extends "snippets/base1.html" %}
+
+{% block content %}
+    <!-- <div class="comments-wrap ">
+        <div id="respond" class="col-full">
+    	<h3 class="h2">Add Code <span>All fields are mandatory. Use a precise title</span></h3>
+        </div>
+    <br>
+</div> -->
+    
+    <form action="/snippets/submitNewCodeSnippet" method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Title*"><br>
+
+    <textarea name="code_snippet" id="code_snippet"> </textarea>
+    <script type="text/javascript">
+        var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code_snippet"), {
+            lineNumbers: true,
+        });
+    </script>
+
+        
+    </form>
+    
+
+
+
+
+	
+{% endblock %}
