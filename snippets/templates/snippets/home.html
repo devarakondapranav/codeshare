@@ -5,6 +5,7 @@
 	{% for x in codes_list %}
 	<script >
 		window.articleid = 0;
+		window.hash = {};
 	</script>
 
 			<article class="col-block">
@@ -19,12 +20,13 @@
         
                         <div class="item-entry__text">    
                             <div class="item-entry__cat">
-                                <a href="/snippets/profile/{{x.author}}">{{x.author}}</a> 
+                                <a href="/snippets/profile/{{x.author}}">{{x.author}}: {{x.id}}</a> 
                             </div>
     
                             <h1 class="item-entry__title"><a href="/snippets/{{x.id}}">{{x.title}}</a></h1>
                             <script>
                             	window.articleid = '{{x.id}}';
+                            	window.hash[`{{x.id}}`] = 1;
 
                              </script>
                             <div class="item-entry__date">
@@ -66,6 +68,12 @@
 
             for(var i=0;i<articles.length;i++)
             {
+            	if(window.hash.hasOwnProperty(articles[i][0]))
+            	{
+
+            	}
+            	else
+            	{
             	$('#articles').append(`<article class="col-block">
 				
                     
@@ -78,7 +86,7 @@
         
                         <div class="item-entry__text">    
                             <div class="item-entry__cat">
-                                <a href="/snippets/profile/` + articles[i][2]+ `">` + articles[i][2] +`</a> 
+                                <a href="/snippets/profile/` + articles[i][2]+ `">` + articles[i][2] +`: ` + articles[i][0] + `</a> 
                             </div>` +
                             `<h1 class="item-entry__title"><a href="/snippets/`+ articles[i][0] +`">` + articles[i][3] +`</a></h1>` + 
                             `<div class="item-entry__date">
@@ -92,6 +100,8 @@
 
             		);
             	window.articleid = articles[i][0];
+            	window.hash[articles[i][0]] = 1;
+            	}
             }
 
 
