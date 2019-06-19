@@ -47,13 +47,89 @@
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
 	<script >
 		
-		$(window).scroll(function() {
+		// $(window).scroll(function() {
 			
-			//console.log(String($(window).scrollTop()) + ": " + $(window).height() + " = " + $(document).height() +", " + ($(window).scrollTop()) +$(window).height());
-		   if($(window).scrollTop() + $(window).height() + 1  >= $(document).height()) {
+		// 	//console.log(String($(window).scrollTop()) + ": " + $(window).height() + " = " + $(document).height() +", " + ($(window).scrollTop()) +$(window).height());
+		//    if($(window).scrollTop() + $(window).height() + 1  >= $(document).height()) {
 		   		
-		   		console.log("article id is " + window.articleid);
-		       $.ajax(
+		//    		console.log("article id is " + window.articleid);
+		//        $.ajax(
+  //   {
+  //       type:"GET",
+  //       url: "/snippets/samplereq/" + String(window.articleid),
+  //       contentType: "application/json",
+  //       data:'',
+  //       success: function( data ) 
+  //       {
+        	
+            
+  //           var articles = data['articles'];
+  //           //console.log(articles);
+
+  //           for(var i=0;i<articles.length;i++)
+  //           {
+  //           	if(window.hash.hasOwnProperty(articles[i][0]))
+  //           	{
+
+  //           	}
+  //           	else
+  //           	{
+  //           	$('#articles').append(`<article class="col-block">
+				
+                    
+  //                   <div class="item-entry" data-aos="zoom-in">
+  //                       <div class="item-entry__thumb">
+  //                           <a href="single-standard.html" class="item-entry__thumb-link">
+                                
+  //                           </a>
+  //                       </div>
+        
+  //                       <div class="item-entry__text">    
+  //                           <div class="item-entry__cat">
+  //                               <a href="/snippets/profile/` + articles[i][2]+ `">` + articles[i][2] +`: ` + articles[i][0] + `</a> 
+  //                           </div>` +
+  //                           `<h1 class="item-entry__title"><a href="/snippets/`+ articles[i][0] +`">` + articles[i][3] +`</a></h1>` + 
+  //                           `<div class="item-entry__date">
+  //                               <a >` + articles[i][1] + `</a>
+  //                           </div>
+  //                       </div>
+  //                   </div> <!-- item-entry -->
+
+  //               </article>`
+
+
+  //           		);
+  //           	window.articleid = articles[i][0];
+  //           	window.hash[articles[i][0]] = 1;
+  //           	}
+  //           }
+
+
+
+
+
+
+  //       },
+  //       error: function (data) {
+  //       	console.log("something went wrong");
+  //       	console.log(data);
+  //       }
+  //    })
+		//    }
+		//    else
+		//    {
+		//    	console.log("yo");
+		//    }
+
+		// })
+$(window).on("scroll", function() {
+	var scrollHeight = $(document).height();
+	var scrollPosition = $(window).height() + $(window).scrollTop();
+	console.log((scrollHeight - scrollPosition) );
+	if ((scrollHeight - scrollPosition)  < 200) {
+	    // when scroll to bottom of the page
+	    //alert("yoooo");
+	    $.ajax(
     {
         type:"GET",
         url: "/snippets/samplereq/" + String(window.articleid),
@@ -115,14 +191,8 @@
         	console.log(data);
         }
      })
-		   }
-		   else
-		   {
-		   	console.log("yo");
-		   }
-
-		})
-
+	}
+});
 		
 	</script>
 
