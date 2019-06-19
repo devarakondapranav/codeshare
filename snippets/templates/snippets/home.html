@@ -3,8 +3,12 @@
 {% block content %}
 {{username}}
 	{% for x in codes_list %}
+	<script >
+		window.articleid = 0;
+	</script>
 
 			<article class="col-block">
+				
                     
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
@@ -19,7 +23,10 @@
                             </div>
     
                             <h1 class="item-entry__title"><a href="/snippets/{{x.id}}">{{x.title}}</a></h1>
-                                
+                            <script>
+                            	window.articleid = '{{x.id}}';
+
+                             </script>
                             <div class="item-entry__date">
                                 <a >{{x.pub_date}}</a>
                             </div>
@@ -35,4 +42,73 @@
 			 	<a href="/snippets/{{x.id}}">{{x.title}}</a> by  <a href="/snippets/profile/{{x.author}}" style="color: red">{{x.author}}</a>			
 			</li> -->
 	{% endfor %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script >
+		
+		$(window).scroll(function() {
+			
+			//console.log(String($(window).scrollTop()) + ": " + $(window).height() + " = " + $(document).height() +", " + ($(window).scrollTop()) +$(window).height());
+		   if($(window).scrollTop() + $(window).height()  >= $(document).height()) {
+		   		
+		   		console.log("article id is " + window.articleid);
+		       $.ajax(
+    {
+        type:"GET",
+        url: "/snippets/samplereq/" + String(window.articleid),
+        contentType: "application/json",
+        data:'',
+        success: function( data ) 
+        {
+        	
+            
+            var articles = data['articles'];
+            //console.log(articles);
+
+            for(var i=0;i<articles.length;i++)
+            {
+            	$('#articles').append(`<article class="col-block">
+				
+                    
+                    <div class="item-entry" data-aos="zoom-in">
+                        <div class="item-entry__thumb">
+                            <a href="single-standard.html" class="item-entry__thumb-link">
+                                
+                            </a>
+                        </div>
+        
+                        <div class="item-entry__text">    
+                            <div class="item-entry__cat">
+                                <a href="/snippets/profile/` + articles[i][2]+ `">` + articles[i][2] +`</a> 
+                            </div>` +
+                            `<h1 class="item-entry__title"><a href="/snippets/`+ articles[i][0] +`">` + articles[i][3] +`</a></h1>` + 
+                            `<div class="item-entry__date">
+                                <a >` + articles[i][1] + `</a>
+                            </div>
+                        </div>
+                    </div> <!-- item-entry -->
+
+                </article>`
+
+
+            		);
+            	window.articleid = articles[i][0];
+            }
+
+
+
+
+
+
+        },
+        error: function (data) {
+        	console.log("something went wrong");
+        	console.log(data);
+        }
+     })
+		   }})
+
+		
+	</script>
+
+	
 {% endblock %}

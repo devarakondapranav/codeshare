@@ -1,15 +1,23 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 
 
 from .models import Code
 
 def home(request):
-	a = Code.objects.order_by('-pub_date')
+	a = Code.objects.order_by('-pub_date')[:9]
 	context = {"codes_list": a}
 	return render(request, 'snippets/home.html', context)
-	
+
+#manages infinite scrolling
+def samplereq(request, start):
+	articles = Code.objects.order_by('-pub_date').filter(id__lt = start)[:6]
+	temp = []
+	for yo in articles:
+		temp.append((yo.id, yo.pub_date,yo.author, yo.title, yo.code_snippet))
+
+	return JsonResponse({'articles':temp})
 
 def viewCode(request, code_id):
 	
