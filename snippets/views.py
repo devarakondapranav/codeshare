@@ -6,7 +6,7 @@ from django.utils import timezone
 from .models import Code
 
 def home(request):
-	a = Code.objects.order_by('-pub_date')[:12]
+	a = Code.objects.order_by('-pub_date')[:16]
 	context = {"codes_list": a}
 	return render(request, 'snippets/home.html', context)
 
