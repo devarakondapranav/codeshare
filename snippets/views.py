@@ -6,7 +6,7 @@ from django.utils import timezone
 from .models import Code
 
 def home(request):
-	a = Code.objects.order_by('-pub_date')[:9]
+	a = Code.objects.order_by('-pub_date')[:12]
 	context = {"codes_list": a}
 	return render(request, 'snippets/home.html', context)
 
@@ -33,7 +33,7 @@ def newCodeSnippet(request):
 		context = {}
 		return render(request, 'snippets/newCodeSnippet.html', context)
 	else:
-		context = {"errorMessage" : "Please <a href='#'>login</a> to add new code."}
+		context = {"errorMessage" : "Please login to add new code."}
 		return render(request, 'snippets/errorPage.html', context)
 
 def submitNewCodeSnippet(request):

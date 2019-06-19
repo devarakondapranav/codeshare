@@ -48,7 +48,7 @@
 		$(window).scroll(function() {
 			
 			//console.log(String($(window).scrollTop()) + ": " + $(window).height() + " = " + $(document).height() +", " + ($(window).scrollTop()) +$(window).height());
-		   if($(window).scrollTop() + $(window).height()  >= $(document).height()) {
+		   if($(window).scrollTop() + $(window).height() + 1  >= $(document).height()) {
 		   		
 		   		console.log("article id is " + window.articleid);
 		       $.ajax(
@@ -105,7 +105,13 @@
         	console.log(data);
         }
      })
-		   }})
+		   }
+		   else
+		   {
+		   	console.log("yo");
+		   }
+
+		})
 
 		
 	</script>
