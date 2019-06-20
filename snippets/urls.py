@@ -12,5 +12,7 @@ urlpatterns = [
     path('profile/<str:username>', views.showProfile, name='showProfile'),
     path('search', views.search, name='search'),
     path('samplereq/<int:start>', views.samplereq, name='samplereq'),
+    path('register', views.register, name='register'),
+    path('createuser', views.createuser, name='createuser'),
     
 ]

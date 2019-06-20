@@ -1,0 +1,94 @@
+{% extends "snippets/base1.html" %}
+
+{% block content %}
+
+<!-- {% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %} -->
+
+<!-- {% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %} -->
+
+
+<form method="post" action="/snippets/createuser" onsubmit="return validate()">
+{% csrf_token %}
+<table>
+
+<tr>
+	<div class="col-md-4 mb-3">
+  <td><label>Email</label></td>
+  <td><input type="text" name="email" id = "email"></td>
+</div>
+</tr>
+
+<tr>
+  <td><label>Username</label></td>
+  <td><input type="text" name="username" id = "username"></td>
+</tr>
+
+<tr>
+  <td><label>Password</label></td>
+  <td><input type="password" name="password" id = "password"></td>
+</tr>
+
+
+</table>
+
+<input type="submit" value="Register" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+
+<script type="text/javascript">
+  function validate() {
+
+    username = document.getElementById("username").value;
+    if(username.length == 0)
+    {
+      alert("Please enter a username");
+      return false;
+    }
+    if(username.length <= 3)
+    {
+      alert("Username should be more than 3 characters");
+      return false;
+    }
+
+    email = document.getElementById("email").value;
+    if(email.length == 0)
+    {
+      alert("Please enter an email");
+      return false;
+    }
+
+    password = document.getElementById("password").value;
+    if(password.length == 0)
+    {
+      alert("Please enter a password");
+      return false;
+    }
+    if(password.length < 6)
+    {
+      alert("Password should be atleast 6 characters");
+      return false;
+    }
+
+    return true;
+    
+
+
+
+
+  }
+</script>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<!-- <p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
+
+{% endblock %}

@@ -17,28 +17,21 @@
     <!-- CSS
     ================================================== -->
     <link rel="stylesheet" href="{% static 'snippets/css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'snippets/css/vendor.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'snippets/css/vendor.css' %}"> -->
+    
     <link rel="stylesheet" href="{% static 'snippets/css/main.css' %}">
 
     <!-- Code mirror
     ================================================== -->
     <link rel="stylesheet" href="{% static 'snippets/lib/codemirror.css' %}">
     <link rel="stylesheet" href="{% static 'snippets/theme/monokai.css' %}">
-    <!-- <script src="{% static 'snippets/mode/javascript/javascript.js' %}"></script> -->
+    <script src="{% static 'snippets/mode/javascript/javascript.js' %}"></script>
     <script src="{% static 'snippets/lib/codemirror.js' %}"></script>
+
 
     <!-- Google code-prettify
     ================================================== -->
-    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-    <style>
-
-        .prettyprint ol.linenums > li { list-style-type: decimal; }
-        pre.prettyprint {
-    padding: 17px;
-    border: 1px solid #888;
-    }
-
-    </style> 
+    
 
 
     <!-- script
@@ -145,11 +138,13 @@
     ================================================== -->
     <br>
     <section class="s-content">
+         <script src="{% static 'snippets/js/jquery-3.4.js' %}"></script>
         
         <div class="row entries-wrap wide">
             {% block newcode %}
             {% endblock %}
-            <div class="entries">
+            
+            <div class="entries" id="articles">
                 
                 {% block content %}
                 {% endblock %}
@@ -207,11 +202,19 @@
         </div> -->
 
     </section> <!-- end s-content -->
+<div class="col-six">
+                    <div class="s-footer__copyright">
+                        <span>
+  made by Pranav Devarakonda
 
+</span>
+<br>with ❤ to Roshna
+                    </div>
+                </div>
 
     <!-- s-extra
     ================================================== -->
-    <section class="s-extra">
+    <!-- <section class="s-extra">
 
         <div class="row">
 
@@ -223,9 +226,9 @@
                         <a href="#0" class="popular__thumb">
                             <img src="images/thumbs/small/tulips-150.jpg" alt="">
                         </a>
-                        <h5>10 Interesting Facts About Caffeine.</h5>
+                        <h5>Popular articles should come here</h5>
                         <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
+                            <span class="popular__author"><span>By</span> <a href="#0">Balayya</a></span>
                             <span class="popular__date"><span>on</span> <time datetime="2018-06-14">Jun 14, 2018</time></span>
                         </section>
                     </article>
@@ -233,20 +236,20 @@
                         <a href="#0" class="popular__thumb">
                             <img src="images/thumbs/small/wheel-150.jpg" alt="">
                         </a>
-                        <h5><a href="#0">Visiting Theme Parks Improves Your Health.</a></h5>
+                        <h5><a href="#0">And I dont know how.</a></h5>
                         <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
+                            <span class="popular__author"><span>By</span> <a href="#0">Lav</a></span>
                             <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12, 2018</time></span>
                         </section>
                     </article>
                     
-                </div> <!-- end popular_posts -->
-            </div> <!-- end popular -->
+                </div> 
+            </div> 
 
 
             <div class="col-four md-six tab-full end">
                 <div class="row">
-                    <!-- <div class="col-six md-six mob-full categories">
+                    <div class="col-six md-six mob-full categories">
                         <h3>Categories</h3>
         
                         <ul class="linklist">
@@ -257,10 +260,10 @@
                             <li><a href="#0">Health</a></li>
                             <li><a href="#0">Creativity</a></li>
                         </ul>
-                    </div>  -->
-                    <!-- end categories -->
+                    </div> 
+                    end categories
         
-                    <!-- <div class="col-six md-six mob-full sitelinks">
+                    <div class="col-six md-six mob-full sitelinks">
                         <h3>Site Links</h3>
         
                         <ul class="linklist">
@@ -271,18 +274,18 @@
                             <li><a href="#0">Contact</a></li>
                             <li><a href="#0">Privacy Policy</a></li>
                         </ul>
-                    </div>  -->
-                    <!-- end sitelinks -->
+                    </div> 
+                    
                 </div>
             </div>
-        </div> <!-- end row -->
+        </div>
 
-    </section> <!-- end s-extra -->
-
-
+    </section> 
+ -->
+ 
     <!-- s-footer
     ================================================== -->
-    <footer class="s-footer">
+    <!-- <footer class="s-footer">
 
         <div class="s-footer__main">
             <div class="row">
@@ -293,14 +296,14 @@
 
                     <p>Jai Balayya</p>
 
-                </div> <!-- end s-footer__about -->
+                </div> 
 
                 
 
-                </div> <!-- end s-footer__subscribe -->
+                </div> 
 
             </div>
-        </div> <!-- end s-footer__main -->
+        </div> 
 
         <div class="s-footer__bottom">
             <div class="row">
@@ -327,26 +330,27 @@
 
                 <div class="col-six">
                     <div class="s-footer__copyright">
-                        <span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <span>
   made with <i class="fa fa-heart" aria-hidden="true"></i> by Pranav Devarakonda
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
 </span>
                     </div>
                 </div>
                 
             </div>
-        </div> <!-- end s-footer__bottom -->
+        </div> 
 
         <div class="go-top">
             <a class="smoothscroll" title="Back to Top" href="#top"></a>
         </div>
 
-    </footer> <!-- end s-footer -->
+    </footer>  -->
 
 
     <!-- Java Script
     ================================================== -->
     <script src="{% static 'snippets/js/jquery-3.2.1.min.js' %}"></script>
+    
     <script src="{% static 'snippets/js/plugins.js' %}"></script>
     <script src="{% static 'snippets/js/main.js' %}"></script>
 

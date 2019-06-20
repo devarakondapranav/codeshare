@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 
 from .models import Code
@@ -18,6 +20,38 @@ def samplereq(request, start):
 		temp.append((yo.id, yo.pub_date,yo.author, yo.title, yo.code_snippet))
 
 	return JsonResponse({'articles':temp})
+
+
+def register(request):
+	if(request.user.is_authenticated):
+		return HttpResponseRedirect('/snippets')
+	else:
+		context = {'errors': ''}
+		return render(request, 'snippets/register.html', context)
+
+
+def createuser(request):
+	if(request.user.is_authenticated):
+	
+		return HttpResponseRedirect('/snippets')
+	else:
+		email = request.POST["email"]
+		username = request.POST["username"]
+		if User.objects.filter(username=username).exists():
+			return render(request, 'snippets/errorPage.html', {'errorMessage': 'A user with this username is already registered with us'})
+
+
+
+
+		password = request.POST["password"]
+		user = User.objects.create_user(username, email, password)
+		user.save()
+
+
+		new_user = authenticate(username=username, password=password)
+		login(request, new_user)
+
+		return HttpResponseRedirect('/snippets')
 
 def viewCode(request, code_id):
 	
