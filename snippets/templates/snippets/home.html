@@ -1,6 +1,12 @@
 {% extends "snippets/base1.html" %}
 
+{% block footerMessage %}
+		dedicated to r❤shna shaik :)
+{% endblock %}
+
+
 {% block content %}
+
 {{username}}
 	{% for x in codes_list %}
 	<script >
@@ -44,6 +50,7 @@
 			 	<a href="/snippets/{{x.id}}">{{x.title}}</a> by  <a href="/snippets/profile/{{x.author}}" style="color: red">{{x.author}}</a>			
 			</li> -->
 	{% endfor %}
+
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
 	<script >
 		

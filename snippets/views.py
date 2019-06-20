@@ -12,6 +12,7 @@ def home(request):
 	context = {"codes_list": a}
 	return render(request, 'snippets/home.html', context)
 
+
 #manages infinite scrolling
 def samplereq(request, start):
 	articles = Code.objects.order_by('-pub_date').filter(id__lt = start)[:6]
@@ -29,29 +30,34 @@ def register(request):
 		context = {'errors': ''}
 		return render(request, 'snippets/register.html', context)
 
+def redirectToHome(request):
+	return HttpResponseRedirect('/snippets')
+
 
 def createuser(request):
-	if(request.user.is_authenticated):
-	
-		return HttpResponseRedirect('/snippets')
+	if(request.method == "POST"):
+		if(request.user.is_authenticated):
+		
+			return HttpResponseRedirect('/snippets')
+		else:
+			email = request.POST["email"]
+			username = request.POST["username"]
+			if User.objects.filter(username=username).exists():
+				return render(request, 'snippets/errorPage.html', {'errorMessage': 'A user with this username is already registered with us'})
+
+
+
+			password = request.POST["password"]
+			user = User.objects.create_user(username, email, password)
+			user.save()
+
+
+			new_user = authenticate(username=username, password=password)
+			login(request, new_user)
+
+			return HttpResponseRedirect('/snippets')
 	else:
-		email = request.POST["email"]
-		username = request.POST["username"]
-		if User.objects.filter(username=username).exists():
-			return render(request, 'snippets/errorPage.html', {'errorMessage': 'A user with this username is already registered with us'})
-
-
-
-
-		password = request.POST["password"]
-		user = User.objects.create_user(username, email, password)
-		user.save()
-
-
-		new_user = authenticate(username=username, password=password)
-		login(request, new_user)
-
-		return HttpResponseRedirect('/snippets')
+		return HttpResponse("Po ra kuyya.")
 
 def viewCode(request, code_id):
 	

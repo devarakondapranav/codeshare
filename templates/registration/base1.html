@@ -31,7 +31,7 @@
 
     <!-- Google code-prettify
     ================================================== -->
-    
+   
 
 
     <!-- script
@@ -107,6 +107,8 @@
                 </li>
                 {% else %}
                 <li class="current"><a href="{% url 'login'%}?next={{request.path}}" title="">Login</a></li>
+                <li class="current"><a href="/snippets/register" title="">Register</a></li>
+
                 {% endif %}
                 <li class="current"><a href="/snippets/newCodeSnippet" title="">New Article</a></li>
                 <!-- <li class="has-children">
@@ -205,10 +207,12 @@
 <div class="col-six">
                     <div class="s-footer__copyright">
                         <span>
-  made by Pranav Devarakonda
+  {% block footerMessage %}
+  {% endblock %}
+
 
 </span>
-<br>with ❤ to Roshna
+
                     </div>
                 </div>
 
