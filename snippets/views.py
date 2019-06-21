@@ -33,6 +33,9 @@ def register(request):
 def redirectToHome(request):
 	return HttpResponseRedirect('/snippets')
 
+def redirectToCode(request, codeid):
+	return HttpResponseRedirect('/snippets/' + str(codeid))
+
 
 def createuser(request):
 	if(request.method == "POST"):
