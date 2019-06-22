@@ -64,12 +64,16 @@ def createuser(request):
 
 def viewCode(request, code_id):
 	
-	a = Code.objects.get(pk=code_id)
-	if(True):
-		context = {"code_object": a}
-		return render(request, 'snippets/codeView.html', context)
+	if(Code.objects.filter(id=code_id)):
+		a = Code.objects.get(pk=code_id)
+		if(True):
+			context = {"code_object": a}
+			return render(request, 'snippets/codeView.html', context)
+		else:
+			return None
 	else:
-		return None
+		context = {"errorMessage" : "Invalid article code 😢"}
+		return render(request, 'snippets/errorPage.html', context)
 
 def newCodeSnippet(request):
 	if(request.user.is_authenticated):
