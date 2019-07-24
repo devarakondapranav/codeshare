@@ -3,8 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.redirectToHome, name="redirectToHome"),
-    path('<int:codeid>', views.redirectToCode, name = 'redirectToCode'),
+    path('', views.home, name="redirectToHome"),
+    path('<int:code_id>', views.viewCode, name = 'redirectToCode'),
     
     
 ]
