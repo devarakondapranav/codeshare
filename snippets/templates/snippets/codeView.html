@@ -63,10 +63,16 @@
             </div>
 
             <hr>
+
+
+
 		    {% if user.is_authenticated and user.get_username == code_object.author %}
 		    	<a href="/snippets/edit/{{code_object.id}}" class="btn btn-primary">Edit</a>
 
+
 		    {% endif %}
+
+            
 
 	</article>
 
@@ -74,4 +80,81 @@
 
 
 
+{% endblock %}
+
+
+{% block comment_section %}
+<div class="comments-wrap">
+
+            <div id="comments" class="row">
+                <div class="col-full">
+                    {% if comments_length == 0 %}
+                        <label style='font-family: "Libre Baskerville" '>No comments as of now. Add one in appreciation of the author 🙃</label>
+                        
+                    {% else %}
+                        {% if comments_length == 1 %}
+                            <h3 class="h2">1 Comment</h3>
+                        {% else %}
+                            <h3 class="h2">{{comments_length}} Comments</h3>
+                        {% endif %}
+                    {% endif %}
+
+
+
+                    <!-- commentlist -->
+                    <ol class="commentlist">
+
+                        {% for comment in comments %}
+
+                        <li class="depth-1 comment">
+
+
+                            <div class="comment__content">
+
+                                <div class="comment__info">
+                                    <h4><cite style="color: black">{{ comment.commentor}}</cite></h4>
+
+                                    <div class="comment__meta">
+                                        <time class="comment__time">{{comment.post_date}}</time>
+                                        <!-- <a class="reply" href="#0">Reply</a> -->
+                                    </div>
+                                </div>
+
+                                <div class="comment__text">
+                                <p style="color:black">{{comment.comment_text}}</p>
+                                </div>
+
+                            </div>
+
+                        </li>
+                        <hr> 
+                        {% endfor %}
+
+                    </ol> <!-- end commentlist -->
+
+
+                    <!-- respond
+                    ================================================== -->
+                    <div class="respond">
+
+                        <h4><cite style="color: black">Add a comment</cite></h4>
+
+                        <form name="contactForm" id="contactForm" method="post" action="">
+                            <fieldset>
+
+                                <div class="message form-field">
+                                    <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message"></textarea>
+                                </div>
+
+                                <button type="submit" class="submit btn--primary btn--large full-width">Submit</button>
+
+                            </fieldset>
+                        </form> <!-- end form -->
+
+                    </div> <!-- end respond -->
+
+                </div> <!-- end col-full -->
+
+            </div> <!-- end row comments -->
+        </div>
 {% endblock %}

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 
-from .models import Code
+from .models import Code, Comment
 
 def home(request):
 	a = Code.objects.order_by('-pub_date')[:16]
@@ -66,8 +66,10 @@ def viewCode(request, code_id):
 	
 	if(Code.objects.filter(id=code_id)):
 		a = Code.objects.get(pk=code_id)
+		comments = Comment.objects.filter(code=a)
+		l = len(comments)
 		if(True):
-			context = {"code_object": a}
+			context = {"code_object": a, "comments":comments, "comments_length":l}
 			return render(request, 'snippets/codeView.html', context)
 		else:
 			return None
