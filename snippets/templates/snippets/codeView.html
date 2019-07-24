@@ -20,6 +20,9 @@
 	  </div>
 
 	</div> -->
+    
+
+  
 	
 	<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <style>
@@ -84,13 +87,16 @@
 
 
 {% block comment_section %}
+  
+
 <div class="comments-wrap">
+
 
             <div id="comments" class="row">
                 <div class="col-full">
                     {% if comments_length == 0 %}
                         <label style='font-family: "Libre Baskerville" '>No comments as of now. Add one in appreciation of the author 🙃</label>
-                        
+
                     {% else %}
                         {% if comments_length == 1 %}
                             <h3 class="h2">1 Comment</h3>
@@ -135,23 +141,30 @@
 
                     <!-- respond
                     ================================================== -->
-                    <div class="respond">
 
-                        <h4><cite style="color: black">Add a comment</cite></h4>
+                    {% if user.is_authenticated %}
+                        <div class="respond">
 
-                        <form name="contactForm" id="contactForm" method="post" action="">
-                            <fieldset>
+                            <h4><cite style="color: black">Add a comment</cite></h4>
 
-                                <div class="message form-field">
-                                    <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message"></textarea>
-                                </div>
+                            <form name="contactForm" id="contactForm" method="POST" action="/snippets/addComment">{% csrf_token %}
+                                <fieldset>
 
-                                <button type="submit" class="submit btn--primary btn--large full-width">Submit</button>
+                                    <div class="message form-field">
+                                        <textarea name="comment_text" id="comment_text" class="full-width" placeholder="Your Message"></textarea>
+                                    </div>
+                                    <input type="hidden" name="username" id="username" value="{{user.get_username}}">
 
-                            </fieldset>
-                        </form> <!-- end form -->
+                                    
+                                    <input type="hidden" name="article_id" id="article_id" value="{{code_object.id}}">
 
-                    </div> <!-- end respond -->
+                                    <button type="submit" class="submit btn--primary btn--large full-width">Submit</button>
+
+                                </fieldset>
+                            </form> <!-- end form -->
+
+                        </div> <!-- end respond -->
+                    {% endif %}
 
                 </div> <!-- end col-full -->
 

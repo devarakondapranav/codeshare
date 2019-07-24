@@ -146,4 +146,30 @@ def search(request):
 	return render(request, 'snippets/searchResults.html', context)
 
 
+def addComment(request):
+
+
+	if(request.user.is_authenticated):
+
+
+	
+		author = request.POST['username']
+		comment_text = request.POST['comment_text']
+		article_id = int(request.POST["article_id"])
+
+		
+
+		code_object = Code.objects.get(pk=article_id)
+
+		comment = Comment(comment_text=comment_text, commentor=author, post_date=timezone.now(), code=code_object)
+
+		comment.save()
+
+		return HttpResponseRedirect("/" + str(article_id))
+
+	else:
+		context = {}
+		context["errorMessage"] = "Please login	 to comment."
+		return render(request, 'snippets/errorPage.html', context)
+
 

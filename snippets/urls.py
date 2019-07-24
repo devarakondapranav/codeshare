@@ -14,5 +14,6 @@ urlpatterns = [
     path('samplereq/<int:start>', views.samplereq, name='samplereq'),
     path('register', views.register, name='register'),
     path('createuser', views.createuser, name='createuser'),
+    path('addComment', views.addComment, name='addComment'),
     
 ]
