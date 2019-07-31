@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 
-from .models import Code, Comment
+
+from .models import Code, Comment, Like
+from .mailhelp import sendEmail
 
 def home(request):
 	a = Code.objects.order_by('-pub_date')[:16]
@@ -68,8 +70,25 @@ def viewCode(request, code_id):
 		a = Code.objects.get(pk=code_id)
 		comments = Comment.objects.filter(code=a)
 		l = len(comments)
+		s = ""
+		like_bool = 0
 		if(True):
 			context = {"code_object": a, "comments":comments, "comments_length":l}
+			if(request.user.is_authenticated):
+
+				is_liked = Like.objects.filter(code=a, liked_by=request.user.get_username)
+				is_liked = Like.objects.filter(code=a)
+				for like in is_liked:
+					if(like.liked_by == request.user.username):
+						like_bool = 1
+						break
+				
+				# if(is_liked):
+				# 	like_bool = 1
+			context["like_bool"] = like_bool
+					
+				
+
 			return render(request, 'snippets/codeView.html', context)
 		else:
 			return None
@@ -161,9 +180,13 @@ def addComment(request):
 
 		code_object = Code.objects.get(pk=article_id)
 
+		post_author_object = User.objects.get(username=code_object.author)
+
 		comment = Comment(comment_text=comment_text, commentor=author, post_date=timezone.now(), code=code_object)
 
 		comment.save()
+
+		sendEmail(post_author_object.email, "There is a new comment on your post.", article_id)
 
 		return HttpResponseRedirect("/" + str(article_id))
 
@@ -173,3 +196,24 @@ def addComment(request):
 		return render(request, 'snippets/errorPage.html', context)
 
 
+def likePost(request):
+	if(request.method == "POST"):
+		username = request.POST["username"]
+		codeid = request.POST["codeid"]
+		c = Code.objects.get(pk = codeid)
+		likeobject = Like.objects.filter(code=c, liked_by=username)
+		if(likeobject):
+			likeobject.delete()
+			c.likes = int(c.likes)-1
+			c.save()
+			
+			return HttpResponse("unliked")
+		else:
+			like = Like(code= c, liked_by = username)
+			like.save()
+			c.likes = int(c.likes) + 1
+			c.save()
+			return HttpResponse("Liked")
+
+	else:
+		return HttpResponse("get request");

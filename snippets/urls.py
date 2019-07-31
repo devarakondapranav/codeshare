@@ -15,5 +15,6 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('createuser', views.createuser, name='createuser'),
     path('addComment', views.addComment, name='addComment'),
+    path('likePost', views.likePost, name="likePost"),
     
 ]

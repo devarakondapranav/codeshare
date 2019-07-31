@@ -52,6 +52,15 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
+    <!--custom styling for like button -->
+    <style type="text/css">
+
+
+
+        {% block likecss %}
+        {% endblock %}
+    </style>
+
 </head>
 
 <body id="top">
@@ -365,7 +374,6 @@
     <!-- Java Script
     ================================================== -->
     <script src="{% static 'snippets/js/jquery-3.2.1.min.js' %}"></script>
-    
     <script src="{% static 'snippets/js/plugins.js' %}"></script>
     <script src="{% static 'snippets/js/main.js' %}"></script>
 
